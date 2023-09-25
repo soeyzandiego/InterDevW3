@@ -6,6 +6,7 @@ public class LegMovement : MonoBehaviour
 {
     [SerializeField] float hingeSpeed = 20;
     [SerializeField] float springForce = 10;
+    [SerializeField][Range(-1, 1)] int moveDir;
 
     [Header("Physics Components")]
     [SerializeField] HingeJoint2D upperHinge;
@@ -31,7 +32,7 @@ public class LegMovement : MonoBehaviour
             JointMotor2D motor = upperHinge.motor;
 
             upperHinge.useMotor = true;
-            motor.motorSpeed = -hingeSpeed;
+            motor.motorSpeed = hingeSpeed * moveDir;
             upperHinge.motor = motor;
         }
         else
@@ -44,7 +45,7 @@ public class LegMovement : MonoBehaviour
             JointMotor2D motor = lowerHinge.motor;
 
             lowerHinge.useMotor = true;
-            motor.motorSpeed = -hingeSpeed;
+            motor.motorSpeed = hingeSpeed * moveDir;
             lowerHinge.motor = motor;
         }
         else
@@ -57,4 +58,5 @@ public class LegMovement : MonoBehaviour
             footSpring.GetComponent<Rigidbody2D>().AddForce(transform.up * springForce, ForceMode2D.Impulse);
         }
     }
+
 }
