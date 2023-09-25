@@ -21,8 +21,9 @@ public class SegmentController : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow)) { NextSegment(); }
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) { LastSegment(); }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.D))
         {
             JointMotor2D curMotor = curSegment.motor;
 
@@ -30,12 +31,20 @@ public class SegmentController : MonoBehaviour
             curMotor.motorSpeed = hingeSpeed;
             curSegment.motor = curMotor;
         }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            JointMotor2D curMotor = curSegment.motor;
+
+            curSegment.useMotor = true;
+            curMotor.motorSpeed = -hingeSpeed;
+            curSegment.motor = curMotor;
+        }
         else
         {
             curSegment.useMotor = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             SpringJoint2D previousSegment = segmentHinges[segIndex - 1].GetComponent<SpringJoint2D>();
             previousSegment.distance -= 1f;
@@ -49,6 +58,17 @@ public class SegmentController : MonoBehaviour
 
         if (segIndex < segmentHinges.Length - 1) { segIndex++; }
         else { segIndex = 0; }
+        curSegment = segmentHinges[segIndex];
+        curSegment.GetComponent<SpriteRenderer>().color = Color.red;
+    }
+
+    void LastSegment()
+    {
+        // reset color
+        curSegment.GetComponent<SpriteRenderer>().color = Color.white;
+
+        if (segIndex > 0) { segIndex--; }
+        else { segIndex = segmentHinges.Length - 1; }
         curSegment = segmentHinges[segIndex];
         curSegment.GetComponent<SpriteRenderer>().color = Color.red;
     }
