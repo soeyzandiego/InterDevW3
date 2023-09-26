@@ -43,12 +43,6 @@ public class SegmentController : MonoBehaviour
         {
             curSegment.useMotor = false;
         }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            SpringJoint2D previousSegment = segmentHinges[segIndex - 1].GetComponent<SpringJoint2D>();
-            previousSegment.distance -= 1f;
-        }
     }
 
     void NextSegment()
