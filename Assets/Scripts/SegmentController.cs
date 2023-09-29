@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class SegmentController : MonoBehaviour
 {
+
+    [SerializeField] Color selectedColor = Color.red;
+
+    [Header("Hinges")]
     [SerializeField] float hingeSpeed = 75f;
     [SerializeField] HingeJoint2D[] segmentHinges;
 
     int segIndex = 0;
     HingeJoint2D curSegment;
 
+    Color oColor;
+
     // Start is called before the first frame update
     void Start()
     {
         curSegment = segmentHinges[segIndex];
-        curSegment.GetComponent<SpriteRenderer>().color = Color.red;
+        oColor = curSegment.GetComponent<SpriteRenderer>().color;
+        curSegment.GetComponent<SpriteRenderer>().color = selectedColor;
     }
 
     // Update is called once per frame
@@ -45,25 +52,26 @@ public class SegmentController : MonoBehaviour
         }
     }
 
+
     void NextSegment()
     {
         // reset color
-        curSegment.GetComponent<SpriteRenderer>().color = Color.white;
+        curSegment.GetComponent<SpriteRenderer>().color = oColor;
 
         if (segIndex < segmentHinges.Length - 1) { segIndex++; }
         else { segIndex = 0; }
         curSegment = segmentHinges[segIndex];
-        curSegment.GetComponent<SpriteRenderer>().color = Color.red;
+        curSegment.GetComponent<SpriteRenderer>().color = selectedColor;
     }
 
     void LastSegment()
     {
         // reset color
-        curSegment.GetComponent<SpriteRenderer>().color = Color.white;
+        curSegment.GetComponent<SpriteRenderer>().color = oColor;
 
         if (segIndex > 0) { segIndex--; }
         else { segIndex = segmentHinges.Length - 1; }
         curSegment = segmentHinges[segIndex];
-        curSegment.GetComponent<SpriteRenderer>().color = Color.red;
+        curSegment.GetComponent<SpriteRenderer>().color = selectedColor;
     }
 }

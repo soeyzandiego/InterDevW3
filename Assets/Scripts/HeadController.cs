@@ -10,6 +10,8 @@ public class HeadController : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer sprite;
 
+    bool touching;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,7 @@ public class HeadController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && touching)
         {
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
             //rb.freezeRotation = true;
@@ -32,5 +34,10 @@ public class HeadController : MonoBehaviour
             //rb.freezeRotation = false;
             sprite.sprite = defaultSprite;
         }
+    }
+
+    void FixedUpdate()
+    {
+        touching = GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Ground"));
     }
 }
