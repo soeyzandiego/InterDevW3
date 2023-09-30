@@ -25,13 +25,11 @@ public class HeadController : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && touching)
         {
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
-            //rb.freezeRotation = true;
             sprite.sprite = grabSprite;
         }
         else
         {
             rb.constraints = RigidbodyConstraints2D.None;
-            //rb.freezeRotation = false;
             sprite.sprite = defaultSprite;
         }
     }
