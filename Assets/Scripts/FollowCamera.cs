@@ -16,6 +16,7 @@ public class FollowCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // uhhh swap this to smoothdampen for future
         Vector3 targetPos = new Vector3(targetTransform.position.x, 0, -10);
         targetPos.x = Mathf.Clamp(targetTransform.position.x, leftBound, rightBound);
 
