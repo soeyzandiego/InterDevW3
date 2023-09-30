@@ -24,6 +24,7 @@ public class RopeController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (attachPoint == null) { return; } // so no error thrown when inspector field is empty
         Gizmos.DrawLine(attachPoint.position + offset, transform.position);
     }
 }

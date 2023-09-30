@@ -12,13 +12,15 @@ public class SceneLoader : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // r to restart
-        if (Input.GetKeyDown(KeyCode.R))
+        // restart
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
+
+    // I ended up not needing another scene
     public void QueueSceneOfIndex(int _index)
     {
         sceneToLoad = _index;
